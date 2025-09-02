@@ -1,8 +1,8 @@
 header{display:flex;position:relative;justify-content:space-between;align-items:center;height:80px}
-header .menu{width:42px;height:42px;background:url(/assets/menu.svg) center/30px no-repeat}
+header .menu{width:42px;height:42px;background:url(../assets/menu.svg) center/30px no-repeat}
 header .logo{position:absolute;top:50%;left:50%;font-family:Georgia, 'Times New Roman', Times, serif;font-size:32px;transform:translate(-50%, -50%);margin:0;}
 .header-user{display:flex;gap:10px}
 .header-user_btn{flex:0 0 auto;width:42px;height:42px;background:none center/30px no-repeat}
-.header-user_btn.help{background-image:url(/assets/help.svg)}
-.header-user_btn.graph{background-image:url(/assets/graph.svg)}
-.header-user_btn.option{background-image:url(/assets/cog.svg)}
+.header-user_btn.help{background-image:url(../assets/help.svg)}
+.header-user_btn.graph{background-image:url(../assets/graph.svg)}
+.header-user_btn.option{background-image:url(../assets/cog.svg)}
