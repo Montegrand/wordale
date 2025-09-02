@@ -1,6 +1,12 @@
-
-
-main{display:flex;flex-direction:column;gap:10px;}
-.time{text-align:center;margin-top:10px;}
-.board-row{display:flex;justify-content:center;align-items:center;gap:10px;}
-.board-block{display:flex;justify-content:center;align-items:center;border:3px solid #d3d6da;width:60px;height:60px;}
+main{display:flex;flex-direction:column;gap:10px}
+.time{margin-top:10px;text-align:center}
+.board-row{display:flex;justify-content:center;align-items:center;gap:10px}
+.board-block{display:flex;justify-content:center;align-items:center;width:60px;height:60px;border:3px solid #d3d6da}
+.board-block.strike{background-color:greenyellow}
+.board-block.ball{background-color:orange}
+.board-block.out{background-color:crimson}
+.result-wrap{display:block;position:fixed;top:0;right:0;bottom:0;left:0;z-index:10;background-color:rgba(0,0,0,.3)}
+.result-box{display:flex;position:absolute;top:0;right:0;bottom:0;left:0;flex-direction:column;justify-content:center;align-items:center;width:280px;height:300px;margin:auto;border-radius:8px;background-color:#fff}
+.result-box{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px}
+.result-box .result-title{color:#222;font-size:32px;font-weight:bolder}
+.result-box .result-time{font-size:20px;font-weight:normal}

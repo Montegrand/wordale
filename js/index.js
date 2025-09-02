@@ -17,9 +17,23 @@ function startApp(){
 
     const rows = document.querySelectorAll('.board-row');
 
+    const total = rows.length;
     let index = 0;
     let count = 0;
-    let total = rows.length;
+
+    const startTime = new Date();
+
+    playTime = setInterval(()=>{
+        document.querySelector('.time').innerText = timer();
+    });
+
+    const timer = ()=>{
+        const currTime = new Date(new Date() - startTime);
+        const 분 = ('0'+currTime.getMinutes()).slice(-2);
+        const 초 = ('0'+currTime.getSeconds()).slice(-2);
+
+        return `${분}:${초}`;
+    }
 
     const render = ()=>{
         const row = rows[count];
@@ -31,18 +45,55 @@ function startApp(){
         };
     };
 
+    const appDone = chk=>{
+        if(chk) resultOut(true);
+        count++;
+        index = 0;
+        if(count === total) resultOut(false);
+    };
+
+    const resultOut = resChk=>{
+        document.removeEventListener('keydown',handleKeydown);
+        const resultWrap = document.createElement('div');
+        resultWrap.classList.add('result-wrap');
+
+        const resultBox = document.createElement('div');
+        resultBox.classList.add('result-box');
+
+        const resultContent = document.createElement('div');
+        resultContent.classList.add('result-box_content');
+
+        const doneTime = timer();
+        clearInterval(playTime);
+
+        resultBox.innerHTML = `
+        <span class="result-title">${resChk ? '승리' : '패배'}</span>
+        <span class="result-time">${doneTime}</span>
+        `;
+
+        document.querySelector('main')
+            .appendChild(resultWrap)
+            .appendChild(resultBox);
+    };
+
     const answerCheck = ()=>{
-        if(userAnswer.length !== correct.length) return;
+        if(index !== correct.length) return;
 
         const row = rows[count];
         const cells = row.children;
+        let chkCount = 0;
 
         for(const cell in cells){
             if(typeof cells[cell] !== "object") continue;
             const cellElement = cells[cell];
 
             cellElement.classList.add(userAnswer[cell].chk);
+            if(userAnswer[cell].chk === 'strike') chkCount++;
+            delete userAnswer[cell];
         };
+
+        if(chkCount === correct.length) appDone(true);
+        else appDone(false);
     };
 
     const handleKeydown = e=>{
@@ -64,9 +115,7 @@ function startApp(){
         }
         if(keyCode === 13) answerCheck();
 
-        render();
-
-        console.log(userAnswer, keyCode)
+        if(count < total) render();
     }
 
     document.addEventListener('keydown',handleKeydown);
