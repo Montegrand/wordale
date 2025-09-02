@@ -100,6 +100,8 @@ function startApp(){
         const key = e.key.toUpperCase();
         const keyCode = e.keyCode;
 
+        if(/[갸-힣]/.test(key)) return window.alert('영문 입력인지 확인해주세요');
+
         if(65<= keyCode && keyCode <= 90 && /[A-Z]/.test(key) && index < 5){
             userAnswer[index] = {
                 char : key,
