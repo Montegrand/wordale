@@ -118,7 +118,30 @@ function startApp(){
         if(count < total) render();
     }
 
+    const handleClick = e=>{
+        const key = e.target.getAttribute('data-key');
+
+        if(key === 'enter') answerCheck();
+        if(/[A-Z]/.test(key) && index < 5){
+            userAnswer[index] = {
+                char : key,
+                chk : correct[index] === key ? 'strike'
+                : correct.includes(key) ? 'ball'
+                : 'out',
+            };
+            index++;
+        }
+        if(key === 'backspace' && index){
+            index--;
+            delete userAnswer[index];
+        }
+        if(count < total) render();
+    }
+
     document.addEventListener('keydown',handleKeydown);
+    document.querySelectorAll('.keyboard-btn').forEach(ele=>{
+        ele.addEventListener('click',handleClick);
+    })
 };
 
 
